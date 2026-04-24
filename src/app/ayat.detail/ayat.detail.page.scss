@@ -1,0 +1,228 @@
+.surah-header {
+  margin: 16px;
+}
+
+.reading-progress-section {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f8f9ff;
+  border-radius: 12px;
+  border: 1px solid #e0e7ff;
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #6b7280;
+
+    span:last-child {
+      font-weight: 500;
+      color: #374151;
+    }
+  }
+
+  ion-progress-bar {
+    margin-bottom: 12px;
+    --background: #e0e7ff;
+    --progress-background: #3b82f6;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.surah-description {
+  margin-top: 12px;
+  color: var(--ion-color-medium);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+ion-searchbar {
+  display: block;
+  width: calc(100% - 32px);
+  max-width: 720px;
+  margin: 0 auto 16px;
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+ion-list {
+  margin: 0 16px 24px;
+}
+
+ion-item {
+  border-radius: 16px;
+  margin-bottom: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.arabic {
+  text-align: right;
+  direction: rtl;
+  font-size: 1.75rem;
+  line-height: 2.2;
+  margin-top: 8px;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.arabic-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ayat-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.ayat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ayat-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.ayat-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #10b981;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  ion-icon {
+    font-size: 14px;
+  }
+}
+
+ion-item.current-reading {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+
+  ion-label {
+    --color: #92400e;
+  }
+
+  .arabic {
+    color: #92400e;
+  }
+
+  .latin {
+    color: #92400e;
+  }
+
+  .translation {
+    color: #92400e;
+  }
+}
+
+.ayat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ayat-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.reading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #10b981;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  ion-icon {
+    font-size: 14px;
+  }
+}
+
+ion-item.current-reading {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  animation: pulse 2s infinite;
+
+  ion-label {
+    --color: #92400e;
+  }
+
+  .arabic {
+    color: #92400e;
+  }
+
+  .latin {
+    color: #92400e;
+  }
+
+  .translation {
+    color: #92400e;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

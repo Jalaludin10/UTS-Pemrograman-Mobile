@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="book-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Al-Quran</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Continue Reading Section -->
+  <div *ngIf="lastReadSurah" class="continue-reading-card">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Lanjutkan Membaca</ion-card-title>
+        <ion-card-subtitle>{{ lastReadSurah.surahName }} ({{ lastReadSurah.surahNameLatin }})</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Ayat terakhir: {{ lastReadSurah.lastAyatRead }} dari {{ lastReadSurah.totalAyat }}</p>
+        <ion-progress-bar value="{{ lastReadSurah.lastAyatRead / lastReadSurah.totalAyat }}"></ion-progress-bar>
+        <ion-button fill="solid" (click)="continueReading()">
+          <ion-icon slot="start" name="play-outline"></ion-icon>
+          Lanjutkan
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-searchbar
+    class="search-bar"
+    placeholder="Cari surah"
+    [(ngModel)]="query"
+    (ionInput)="filterSurah()"
+  ></ion-searchbar>
+
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="errorMessage" class="error-text">{{ errorMessage }}</div>
+
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Daftar Surah</ion-label>
+    </ion-list-header>
+
+    <ion-item button detail lines="full" class="surah-card" *ngFor="let surah of filteredSurah" (click)="openSurah(surah)">
+      <div slot="start" class="surah-number">
+        {{ surah.number }}
+        <ion-icon *ngIf="isSurahCompleted(surah.number)" name="checkmark-circle" color="success"></ion-icon>
+      </div>
+      <ion-label>
+        <h2>
+          {{ surah.name }} <span>{{ surah.transliteration }}</span>
+        </h2>
+        <p>{{ surah.type }} • {{ surah.ayahCount }} آية</p>
+        <div *ngIf="getSurahBookmark(surah.number)" class="reading-progress">
+          <ion-progress-bar value="{{ getReadingProgress(surah.number) / 100 }}"></ion-progress-bar>
+          <small>{{ getReadingProgress(surah.number) }}% selesai</small>
+        </div>
+      </ion-label>
+      <ion-note slot="end">
+        <span *ngIf="isSurahCompleted(surah.number)">Selesai</span>
+        <span *ngIf="!isSurahCompleted(surah.number) && getSurahBookmark(surah.number)">Lanjutkan</span>
+        <span *ngIf="!getSurahBookmark(surah.number)">Baca</span>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

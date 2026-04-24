@@ -1,0 +1,7 @@
+{
+  "name": "Al-QuranApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

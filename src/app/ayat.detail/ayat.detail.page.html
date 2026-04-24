@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="book-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ surah?.namaLatin || 'Surah' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ surah?.nama }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="errorMessage" class="error-text">{{ errorMessage }}</div>
+
+  <div *ngIf="surah && !isLoading" class="surah-header">
+    <h2>{{ surah.nama }} ({{ surah.namaLatin }})</h2>
+    <p>{{ surah.tempatTurun }} • {{ surah.arti }} • {{ surah.jumlahAyat }} ayat</p>
+    <div class="surah-description" [innerHTML]="surah.deskripsi"></div>
+  </div>
+
+  <ion-searchbar
+    *ngIf="surah && !isLoading"
+    placeholder="Cari ayat"
+    [(ngModel)]="searchQuery"
+    (ionInput)="filterAyat()"
+  ></ion-searchbar>
+
+  <ion-list *ngIf="surah && !isLoading" lines="none">
+    <ion-item *ngFor="let ayat of filteredAyat" [id]="'ayat-' + ayat.nomorAyat" [class.current-reading]="isCurrentAyat(ayat.nomorAyat)">
+      <ion-label>
+        <div class="arabic-wrapper">
+          <span class="ayat-number">{{ arabicNumber(ayat.nomorAyat) }}</span>
+          <p class="arabic">{{ ayat.teksArab }}</p>
+        </div>
+        <p class="latin">{{ ayat.teksLatin }}</p>
+        <p class="translation">{{ ayat.teksIndonesia }}</p>
+        <div class="ayat-actions" *ngIf="isCurrentAyat(ayat.nomorAyat)">
+          <span class="reading-indicator">
+            <ion-icon name="eye-outline"></ion-icon>
+            Terakhir Dibaca
+          </span>
+        </div>
+      </ion-label>
+      <ion-button slot="end" fill="clear" size="small" (click)="markAsLastRead(ayat.nomorAyat)"
+                 [color]="isCurrentAyat(ayat.nomorAyat) ? 'primary' : 'medium'">
+        <ion-icon slot="icon-only" name="bookmark" [name]="isCurrentAyat(ayat.nomorAyat) ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item *ngIf="filteredAyat.length === 0">
+      <ion-label>Ayat tidak ditemukan.</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

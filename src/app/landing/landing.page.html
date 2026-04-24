@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="book-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Al-Quran</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="landing-content">
+  <div class="landing-wrapper">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Al-Quran dalam genggaman Anda</h1>
+        <p>Memudahkan anda membanca Al-Quran dimanapun.</p>
+      </div>
+      <ion-button size="large" class="hero-button" (click)="goToHome()">Mulai Baca</ion-button>
+    </div>
+  </div>
+</ion-content>
